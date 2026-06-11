@@ -9,38 +9,168 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WatchlistRouteImport } from './routes/watchlist'
+import { Route as TrendingRouteImport } from './routes/trending'
+import { Route as SeriesRouteImport } from './routes/series'
+import { Route as MoviesRouteImport } from './routes/movies'
+import { Route as GenresRouteImport } from './routes/genres'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WatchIdRouteImport } from './routes/watch.$id'
+import { Route as AnimeIdRouteImport } from './routes/anime.$id'
 
+const WatchlistRoute = WatchlistRouteImport.update({
+  id: '/watchlist',
+  path: '/watchlist',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrendingRoute = TrendingRouteImport.update({
+  id: '/trending',
+  path: '/trending',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SeriesRoute = SeriesRouteImport.update({
+  id: '/series',
+  path: '/series',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MoviesRoute = MoviesRouteImport.update({
+  id: '/movies',
+  path: '/movies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GenresRoute = GenresRouteImport.update({
+  id: '/genres',
+  path: '/genres',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WatchIdRoute = WatchIdRouteImport.update({
+  id: '/watch/$id',
+  path: '/watch/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AnimeIdRoute = AnimeIdRouteImport.update({
+  id: '/anime/$id',
+  path: '/anime/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
+  '/movies': typeof MoviesRoute
+  '/series': typeof SeriesRoute
+  '/trending': typeof TrendingRoute
+  '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
+  '/watch/$id': typeof WatchIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
+  '/movies': typeof MoviesRoute
+  '/series': typeof SeriesRoute
+  '/trending': typeof TrendingRoute
+  '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
+  '/watch/$id': typeof WatchIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
+  '/movies': typeof MoviesRoute
+  '/series': typeof SeriesRoute
+  '/trending': typeof TrendingRoute
+  '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
+  '/watch/$id': typeof WatchIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/genres'
+    | '/movies'
+    | '/series'
+    | '/trending'
+    | '/watchlist'
+    | '/anime/$id'
+    | '/watch/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/genres'
+    | '/movies'
+    | '/series'
+    | '/trending'
+    | '/watchlist'
+    | '/anime/$id'
+    | '/watch/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/genres'
+    | '/movies'
+    | '/series'
+    | '/trending'
+    | '/watchlist'
+    | '/anime/$id'
+    | '/watch/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GenresRoute: typeof GenresRoute
+  MoviesRoute: typeof MoviesRoute
+  SeriesRoute: typeof SeriesRoute
+  TrendingRoute: typeof TrendingRoute
+  WatchlistRoute: typeof WatchlistRoute
+  AnimeIdRoute: typeof AnimeIdRoute
+  WatchIdRoute: typeof WatchIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/watchlist': {
+      id: '/watchlist'
+      path: '/watchlist'
+      fullPath: '/watchlist'
+      preLoaderRoute: typeof WatchlistRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trending': {
+      id: '/trending'
+      path: '/trending'
+      fullPath: '/trending'
+      preLoaderRoute: typeof TrendingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/series': {
+      id: '/series'
+      path: '/series'
+      fullPath: '/series'
+      preLoaderRoute: typeof SeriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/movies': {
+      id: '/movies'
+      path: '/movies'
+      fullPath: '/movies'
+      preLoaderRoute: typeof MoviesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/genres': {
+      id: '/genres'
+      path: '/genres'
+      fullPath: '/genres'
+      preLoaderRoute: typeof GenresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +178,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/watch/$id': {
+      id: '/watch/$id'
+      path: '/watch/$id'
+      fullPath: '/watch/$id'
+      preLoaderRoute: typeof WatchIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/anime/$id': {
+      id: '/anime/$id'
+      path: '/anime/$id'
+      fullPath: '/anime/$id'
+      preLoaderRoute: typeof AnimeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GenresRoute: GenresRoute,
+  MoviesRoute: MoviesRoute,
+  SeriesRoute: SeriesRoute,
+  TrendingRoute: TrendingRoute,
+  WatchlistRoute: WatchlistRoute,
+  AnimeIdRoute: AnimeIdRoute,
+  WatchIdRoute: WatchIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
