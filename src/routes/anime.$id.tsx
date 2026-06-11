@@ -1,8 +1,8 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
-import { Play, Plus, Star, Share2, Heart, Clock } from "lucide-react";
+import { Play, Plus, Star, Share2, Heart } from "lucide-react";
 import { AnimeCard } from "@/components/anime-card";
 import { Row } from "@/components/row";
-import { byId, episodesFor, ANIME } from "@/lib/anime-data";
+import { byId, episodesFor, ANIME, type Anime } from "@/lib/anime-data";
 
 export const Route = createFileRoute("/anime/$id")({
   loader: ({ params }) => {
