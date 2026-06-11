@@ -7,17 +7,19 @@ export function AnimeCard({
   rank,
   episode,
   progress,
+  className = "w-[170px] sm:w-[200px]",
 }: {
   anime: Anime;
   rank?: number;
   episode?: number;
   progress?: number;
+  className?: string;
 }) {
   return (
     <Link
       to="/anime/$id"
       params={{ id: anime.id }}
-      className="group relative block w-[180px] sm:w-[200px] overflow-hidden rounded-2xl bg-surface transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_-15px_oklch(0.58_0.24_295/0.6)]"
+      className={`group relative block ${className} overflow-hidden rounded-2xl bg-surface transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_25px_60px_-15px_oklch(0.58_0.24_295/0.6)]`}
     >
       <div className="relative aspect-[2/3] overflow-hidden rounded-2xl">
         <img
