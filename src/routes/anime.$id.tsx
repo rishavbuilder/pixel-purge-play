@@ -25,7 +25,7 @@ export const Route = createFileRoute("/anime/$id")({
 });
 
 function Detail() {
-  const { anime } = Route.useLoaderData();
+  const { anime } = Route.useLoaderData() as { anime: Anime };
   const eps = episodesFor(anime);
   const related = ANIME.filter((a) => a.id !== anime.id).slice(0, 12);
 
