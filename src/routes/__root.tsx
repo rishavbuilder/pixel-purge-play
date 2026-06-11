@@ -99,7 +99,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <div className="min-h-screen bg-background text-foreground">
         <TopNav />
-        <main className="pt-24 lg:pt-20">
+        <main>
           <Outlet />
         </main>
         <footer className="mt-24 border-t border-white/5 py-12 text-center text-xs text-muted-foreground">
