@@ -15,6 +15,7 @@ import { Route as SeriesRouteImport } from './routes/series'
 import { Route as MoviesRouteImport } from './routes/movies'
 import { Route as GenresRouteImport } from './routes/genres'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AnimeIdRouteImport } from './routes/anime.$id'
 
 const WatchlistRoute = WatchlistRouteImport.update({
   id: '/watchlist',
@@ -46,6 +47,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AnimeIdRoute = AnimeIdRouteImport.update({
+  id: '/anime/$id',
+  path: '/anime/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
   '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
   '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,6 +79,7 @@ export interface FileRoutesById {
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
   '/watchlist': typeof WatchlistRoute
+  '/anime/$id': typeof AnimeIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -81,8 +90,16 @@ export interface FileRouteTypes {
     | '/series'
     | '/trending'
     | '/watchlist'
+    | '/anime/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/genres' | '/movies' | '/series' | '/trending' | '/watchlist'
+  to:
+    | '/'
+    | '/genres'
+    | '/movies'
+    | '/series'
+    | '/trending'
+    | '/watchlist'
+    | '/anime/$id'
   id:
     | '__root__'
     | '/'
@@ -91,6 +108,7 @@ export interface FileRouteTypes {
     | '/series'
     | '/trending'
     | '/watchlist'
+    | '/anime/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -100,6 +118,7 @@ export interface RootRouteChildren {
   SeriesRoute: typeof SeriesRoute
   TrendingRoute: typeof TrendingRoute
   WatchlistRoute: typeof WatchlistRoute
+  AnimeIdRoute: typeof AnimeIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -146,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/anime/$id': {
+      id: '/anime/$id'
+      path: '/anime/$id'
+      fullPath: '/anime/$id'
+      preLoaderRoute: typeof AnimeIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -156,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   SeriesRoute: SeriesRoute,
   TrendingRoute: TrendingRoute,
   WatchlistRoute: WatchlistRoute,
+  AnimeIdRoute: AnimeIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
