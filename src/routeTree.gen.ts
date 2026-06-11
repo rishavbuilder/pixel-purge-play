@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as TrendingRouteImport } from './routes/trending'
 import { Route as SeriesRouteImport } from './routes/series'
 import { Route as MoviesRouteImport } from './routes/movies'
+import { Route as GenresRouteImport } from './routes/genres'
 import { Route as IndexRouteImport } from './routes/index'
 
 const TrendingRoute = TrendingRouteImport.update({
@@ -29,6 +30,11 @@ const MoviesRoute = MoviesRouteImport.update({
   path: '/movies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GenresRoute = GenresRouteImport.update({
+  id: '/genres',
+  path: '/genres',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -37,12 +43,14 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
   '/movies': typeof MoviesRoute
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
   '/movies': typeof MoviesRoute
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
@@ -50,20 +58,22 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/genres': typeof GenresRoute
   '/movies': typeof MoviesRoute
   '/series': typeof SeriesRoute
   '/trending': typeof TrendingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/movies' | '/series' | '/trending'
+  fullPaths: '/' | '/genres' | '/movies' | '/series' | '/trending'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/movies' | '/series' | '/trending'
-  id: '__root__' | '/' | '/movies' | '/series' | '/trending'
+  to: '/' | '/genres' | '/movies' | '/series' | '/trending'
+  id: '__root__' | '/' | '/genres' | '/movies' | '/series' | '/trending'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  GenresRoute: typeof GenresRoute
   MoviesRoute: typeof MoviesRoute
   SeriesRoute: typeof SeriesRoute
   TrendingRoute: typeof TrendingRoute
@@ -92,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MoviesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/genres': {
+      id: '/genres'
+      path: '/genres'
+      fullPath: '/genres'
+      preLoaderRoute: typeof GenresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -104,6 +121,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  GenresRoute: GenresRoute,
   MoviesRoute: MoviesRoute,
   SeriesRoute: SeriesRoute,
   TrendingRoute: TrendingRoute,
